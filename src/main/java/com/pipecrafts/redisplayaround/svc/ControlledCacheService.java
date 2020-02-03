@@ -16,18 +16,20 @@ public class ControlledCacheService {
     return CONTROLLED_PREFIX + relevant;
   }
 
+  private static final String CACHE_REGION = "__myControlledCache";
 
-  @Cacheable(cacheNames = "myControlledCache", key = "T(com.pipecrafts.redisplayaround.svc.ControlledCacheService).getCacheKey(#relevant)")
+
+  @Cacheable(cacheNames = CACHE_REGION, key = "T(com.pipecrafts.redisplayaround.svc.ControlledCacheService).getCacheKey(#relevant)")
   public String getFromCache(String relevant) {
     return null;
   }
 
-  @CacheEvict(cacheNames = "myControlledCache", key = "T(com.pipecrafts.redisplayaround.svc.ControlledCacheService).getCacheKey(#relevant)")
+  @CacheEvict(cacheNames = CACHE_REGION, key = "T(com.pipecrafts.redisplayaround.svc.ControlledCacheService).getCacheKey(#relevant)")
   public void removeFromCache(String relevant) {
   }
 
-  @CachePut(cacheNames = "myControlledCache", key = "T(com.pipecrafts.redisplayaround.svc.ControlledCacheService).getCacheKey(#relevant)")
-  public String populateCache(String relevant, String unrelevantTrackingId) {
+  @CachePut(cacheNames = CACHE_REGION, key = "T(com.pipecrafts.redisplayaround.svc.ControlledCacheService).getCacheKey(#relevant)")
+  public String populateCache(String relevant) {
     return "this is it again!";
   }
 }
